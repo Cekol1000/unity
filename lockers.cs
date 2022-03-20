@@ -9,7 +9,7 @@ public class lockers : MonoBehaviour
     public AudioSource closingSFX;
     bool PlayerRaycasting;
     public Camera DoorRayCamera;
-    bool CanRepeat = true;
+    bool canRepeat = true;
     private bool isUsed = false;
     private bool isPlayerInTrigger = false;
      void Start()
@@ -47,24 +47,24 @@ public class lockers : MonoBehaviour
                 PlayerRaycasting = false;
             }
         }
-        if (!isUsed && isPlayerInTrigger && Input.GetKeyDown("e") && CanRepeat && PlayerRaycasting)
+        if (!isUsed && isPlayerInTrigger && Input.GetKeyDown("e") && canRepeat && PlayerRaycasting)
         {
             animator.SetBool("isOpening", true);
             openingSFX.Play();
             animator.SetBool("isClosing", false);
             isUsed = true;
-            CanRepeat = false;
+            canRepeat = false;
             StartCoroutine(CoolDown());
         }
         else
         {
-            if (isUsed && isPlayerInTrigger && Input.GetKeyDown("e") && CanRepeat && PlayerRaycasting)
+            if (isUsed && isPlayerInTrigger && Input.GetKeyDown("e") && canRepeat && PlayerRaycasting)
             {
                 animator.SetBool("isOpening", false);
                 animator.SetBool("isClosing", true);
                 closingSFX.Play();
                 isUsed = false;
-                CanRepeat = false;
+                canRepeat = false;
                 StartCoroutine(CoolDown());
             }
         }
@@ -73,6 +73,6 @@ public class lockers : MonoBehaviour
     IEnumerator CoolDown()
     {
         yield return new WaitForSeconds(1.2f);
-        CanRepeat = true;
+        canRepeat = true;
     }
 }
